@@ -43,7 +43,7 @@ In an increasingly connected world, health is no longer just personal—it's com
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/[your-repo]/Health.AI.git
+   git clone https://github.com/VishuKalier2003/Microsoft-Imagine-Cup.git
    ```
 2. Navigate to the frontend directory:
    ```bash
