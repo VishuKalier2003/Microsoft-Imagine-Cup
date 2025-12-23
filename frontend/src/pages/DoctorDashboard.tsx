@@ -24,7 +24,7 @@ const resourceData = [
 
 export default function DoctorDashboard() {
     return (
-        <DashboardLayout type="doctor">
+        <DashboardLayout>
             <div className="space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-zinc-950/50 p-6 rounded-2xl border border-white/5">

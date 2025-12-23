@@ -24,7 +24,7 @@ const diseaseRisk = [
 
 export default function UserDashboard() {
     return (
-        <DashboardLayout type="user">
+        <DashboardLayout>
             <div className="space-y-8">
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">

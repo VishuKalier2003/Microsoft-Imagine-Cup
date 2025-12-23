@@ -6,6 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useAuth, type Role } from "@/context/AuthContext";
+import { SparklesCore } from "../components/ui/sparkles";
 
 export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true);
@@ -47,9 +48,19 @@ export default function AuthPage() {
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-6 relative overflow-hidden">
-            {/* Background Glows */}
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px]"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
+            {/* Background Effects */}
+            <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
+                <SparklesCore
+                    id="tsparticlesauth"
+                    background="transparent"
+                    minSize={0.6}
+                    maxSize={1.4}
+                    particleDensity={70}
+                    className="w-full h-full"
+                    particleColor="#FFFFFF"
+                    speed={0.5}
+                />
+            </div>
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}

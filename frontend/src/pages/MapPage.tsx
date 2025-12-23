@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip, LayersControl, LayerGroup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Download, Filter, Search, Maximize2 } from "lucide-react";
+import { Download, Filter, Search } from "lucide-react";
 
 // Mock data for disease distribution
 const diseaseData = [
@@ -56,42 +56,63 @@ export default function MapPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* Map Container */}
                     <Card className="lg:col-span-2 bg-zinc-950 border-white/5 overflow-hidden rounded-2xl h-[600px] relative">
-                        <div className="absolute top-4 right-4 z-[400]">
-                            <button className="p-2 bg-black/60 backdrop-blur-md rounded-lg border border-white/20 text-white hover:bg-black/80">
-                                <Maximize2 size={16} />
-                            </button>
+                        <div className="absolute top-4 right-4 z-[400] pointer-events-none">
+                            {/* Controls are native to leaflet now */}
                         </div>
                         <MapContainer
                             center={[20, 0]}
                             zoom={2}
-                            style={{ height: '100%', width: '100%', background: '#000' }}
-                            zoomControl={false}
+                            style={{ height: '100%', width: '100%', background: '#09090b', zIndex: 1 }}
+                            zoomControl={true}
                         >
-                            <TileLayer
-                                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
-                                attribution='&copy; CARTO'
-                            />
-                            {filteredData.map((marker) => (
-                                <CircleMarker
-                                    key={marker.id}
-                                    center={[marker.lat, marker.lng]}
-                                    pathOptions={{ color: marker.color, fillColor: marker.color, fillOpacity: 0.4 }}
-                                    radius={Math.sqrt(marker.cases) / 2}
-                                >
-                                    <Popup className="custom-popup">
-                                        <div className="p-1">
-                                            <h3 className="font-bold text-zinc-900">{marker.city}</h3>
-                                            <p className="text-xs text-zinc-600">{marker.name}: {marker.cases} cases</p>
-                                            <div className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-600">
-                                                Status: {marker.risk}
-                                            </div>
-                                        </div>
-                                    </Popup>
-                                    <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent={false}>
-                                        <span className="font-semibold">{marker.city} ({marker.cases} cases)</span>
-                                    </Tooltip>
-                                </CircleMarker>
-                            ))}
+                            <LayersControl position="topright">
+                                <LayersControl.BaseLayer checked name="Dark Mode">
+                                    <TileLayer
+                                        url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                                    />
+                                </LayersControl.BaseLayer>
+
+                                <LayersControl.BaseLayer name="Satellite">
+                                    <TileLayer
+                                        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                                        attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                                    />
+                                </LayersControl.BaseLayer>
+
+                                <LayersControl.BaseLayer name="Light Mode">
+                                    <TileLayer
+                                        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                                    />
+                                </LayersControl.BaseLayer>
+
+                                <LayersControl.Overlay checked name="Epidemic Data">
+                                    <LayerGroup>
+                                        {filteredData.map((marker) => (
+                                            <CircleMarker
+                                                key={marker.id}
+                                                center={[marker.lat, marker.lng]}
+                                                pathOptions={{ color: marker.color, fillColor: marker.color, fillOpacity: 0.6 }}
+                                                radius={Math.sqrt(marker.cases) / 1.5}
+                                            >
+                                                <Popup className="custom-popup">
+                                                    <div className="p-1">
+                                                        <h3 className="font-bold text-zinc-900">{marker.city}</h3>
+                                                        <p className="text-xs text-zinc-600">{marker.name}: {marker.cases} cases</p>
+                                                        <div className="mt-2 text-[10px] font-bold uppercase tracking-wider text-red-600">
+                                                            Status: {marker.risk}
+                                                        </div>
+                                                    </div>
+                                                </Popup>
+                                                <Tooltip direction="top" offset={[0, -10]} opacity={1} permanent={false}>
+                                                    <span className="font-semibold text-black">{marker.city} ({marker.cases} cases)</span>
+                                                </Tooltip>
+                                            </CircleMarker>
+                                        ))}
+                                    </LayerGroup>
+                                </LayersControl.Overlay>
+                            </LayersControl>
                         </MapContainer>
                     </Card>
 
@@ -134,20 +155,25 @@ export default function MapPage() {
                     </Card>
                 </div>
             </div>
-
             <style>{`
-        .leaflet-container {
-          filter: grayscale(1) invert(1) contrast(3) brightness(0.9);
-        }
-        .custom-popup .leaflet-popup-content-wrapper {
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 12px;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        .custom-popup .leaflet-popup-tip {
-          background: rgba(255, 255, 255, 0.9);
-        }
-      `}</style>
+                .leaflet-control-layers {
+                    background: #18181b !important;
+                    border: 1px solid rgba(255,255,255,0.1) !important;
+                    color: #a1a1aa !important;
+                    border-radius: 12px !important;
+                }
+                .leaflet-control-layers-toggle {
+                    filter: invert(1) brightness(0.8);
+                }
+                .custom-popup .leaflet-popup-content-wrapper {
+                    background: rgba(255, 255, 255, 0.95);
+                    border-radius: 12px;
+                    padding: 4px;
+                }
+                .leaflet-popup-tip {
+                    background: rgba(255, 255, 255, 0.95);
+                }
+            `}</style>
         </DashboardLayout>
     );
 }
