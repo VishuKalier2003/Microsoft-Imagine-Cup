@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #13ec5b;
+  --color-background-light: #f6f8f6;
+  --color-background-dark: #050505;
+  --color-surface-dark: #111111;
+  --color-surface-glass: rgba(20, 20, 20, 0.7);
+
+  --font-display: 'Lexend', sans-serif;
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: #13ec5b;
+  --color-background: #050505;
+  --color-foreground: #ffffff;
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: #111111;
+  --color-popover-foreground: #ffffff;
+
+  --color-card: #111111;
+  --color-card-foreground: #ffffff;
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+}
+
+@layer base {
+  :root {
+    --border: 142 71% 10%;
+    --input: 142 71% 10%;
+    --ring: 142 71% 45%;
+
+    --secondary: 153 30% 10%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 153 30% 15%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 153 30% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-display;
+  }
+}

@@ -22,7 +22,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         // Load user from localStorage
-        const savedUser = localStorage.getItem("health_ai_user");
+        const savedUser = localStorage.getItem("health_ai_user_new");
         if (savedUser) {
             setUser(JSON.parse(savedUser));
         }
@@ -32,12 +32,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const login = (email: string, role: Role) => {
         const newUser = { email, role };
         setUser(newUser);
-        localStorage.setItem("health_ai_user", JSON.stringify(newUser));
+        localStorage.setItem("health_ai_user_new", JSON.stringify(newUser));
     };
 
     const logout = () => {
         setUser(null);
-        localStorage.removeItem("health_ai_user");
+        localStorage.removeItem("health_ai_user_new");
     };
 
     return (
