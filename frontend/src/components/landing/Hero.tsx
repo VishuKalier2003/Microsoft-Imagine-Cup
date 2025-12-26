@@ -13,7 +13,7 @@ export function Hero() {
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
     const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.9]);
     const y = useTransform(scrollYProgress, [0, 0.8], [0, 50]);
-    const globeOpacity = useTransform(scrollYProgress, [0, 0.5], [0.8, 0.2]);
+    const globeOpacity = useTransform(scrollYProgress, [0, 0.7], [0.8, 0]);
 
     return (
         <section ref={containerRef} className="relative px-6 pt-20 pb-12 sm:pt-32 flex flex-col items-center justify-center min-h-screen text-center overflow-hidden">
@@ -23,8 +23,8 @@ export function Hero() {
                 className="absolute inset-0 z-0 h-full w-full pointer-events-none"
             >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background-dark/30 to-background-dark z-10 pointer-events-none"></div>
-                <div className="relative h-full w-full flex items-center justify-center">
-                    <Globe className="relative top-0 max-w-[800px] pointer-events-auto" />
+                <div className="absolute bottom-[-15%] left-1/2 -translate-x-1/2 w-full flex items-center justify-center">
+                    <Globe className="relative w-[1200px] max-w-[1200px] pointer-events-auto" />
                 </div>
                 <div className="absolute top-1/4 left-1/4 w-3 h-3 animate-ping rounded-full bg-primary/80 z-20"></div>
                 <div className="absolute top-1/3 right-1/4 w-2 h-2 animate-ping rounded-full bg-primary/60 delay-300 z-20"></div>
