@@ -1,5 +1,6 @@
 import { Radar, LineChart, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
 
 const features = [
     {
@@ -44,8 +45,10 @@ const itemVariants = {
 };
 
 export function Features() {
+    const { openAuth } = useAuth();
+
     return (
-        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-32 pt-16">
+        <section id="features" className="relative z-10 mx-auto max-w-7xl px-6 pb-32 pt-16">
             <div className="mb-16 text-center">
                 <h2 className="mb-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
                     Engineered for <span className="text-primary">Global Resilience</span>
@@ -83,12 +86,15 @@ export function Features() {
                                 {feature.description}
                             </p>
 
-                            <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-primary/0 transition-all duration-300 group-hover:text-primary/100">
+                            <button
+                                onClick={() => openAuth('signup')}
+                                className="mt-8 flex items-center gap-2 text-sm font-semibold text-primary border-none bg-transparent p-0 transition-all duration-300 hover:gap-3"
+                            >
                                 <span>Learn more</span>
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform group-hover:translate-x-1">
                                     <path d="M1 6H11M11 6L6 1M11 6L6 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
-                            </div>
+                            </button>
                         </div>
                     </motion.div>
                 ))}

@@ -2,6 +2,7 @@ import { Globe } from "@/components/ui/globe";
 import { Search, ArrowRight, CheckCircle } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 export function Hero() {
     const containerRef = useRef(null);
@@ -14,6 +15,8 @@ export function Hero() {
     const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.9]);
     const y = useTransform(scrollYProgress, [0, 0.8], [0, 50]);
     const globeOpacity = useTransform(scrollYProgress, [0, 0.7], [0.8, 0]);
+
+    const { openAuth } = useAuth();
 
     return (
         <section ref={containerRef} className="relative px-6 pt-20 pb-12 sm:pt-32 flex flex-col items-center justify-center min-h-screen text-center overflow-hidden">
@@ -61,7 +64,10 @@ export function Hero() {
                             className="h-full flex-1 bg-transparent border-none p-0 text-base text-white placeholder-gray-400 focus:ring-0 focus:outline-none bg-none"
                             placeholder="Search region or healthcare facility..."
                         />
-                        <button className="rounded-lg bg-primary/10 p-2 text-primary hover:bg-primary hover:text-black transition-colors">
+                        <button
+                            onClick={() => openAuth('signup')}
+                            className="rounded-lg bg-primary/10 p-2 text-primary hover:bg-primary hover:text-black transition-colors"
+                        >
                             <ArrowRight className="w-[20px] h-[20px]" />
                         </button>
                     </div>

@@ -1,9 +1,9 @@
-# Health.AI: The Future of Personal & Global Health
+# Sentinel: The Future of Personal & Global Health
 
-Health.AI is a revolutionary health monitoring and epidemiological tracking platform designed to empower individuals with real-time health insights and provide medical professionals with advanced predictive tools. Built for the Microsoft Imagine Cup, this project leverages AI to bridge the gap between personal vitals and global disease prevention.
+Sentinel is a revolutionary health monitoring and epidemiological tracking platform designed to empower individuals with real-time health insights and provide medical professionals with advanced predictive tools. Built for the Microsoft Imagine Cup, this project leverages AI to bridge the gap between personal vitals and global disease prevention.
 
 ## 🌟 Vision
-In an increasingly connected world, health is no longer just personal—it's communal. Health.AI aims to create a "Global Health Shield" by correlating individual smartwatch data with real-time regional disease spread. Our platform doesn't just track your health; it protects you based on your environment.
+In an increasingly connected world, health is no longer just personal—it's communal. Sentinel aims to create a "Global Health Shield" by correlating individual smartwatch data with real-time regional disease spread. Our platform doesn't just track your health; it protects you based on your environment.
 
 ## 🚀 Key Features
 
